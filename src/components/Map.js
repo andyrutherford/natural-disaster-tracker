@@ -1,7 +1,12 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import GoogleMapReact from 'google-map-react';
 
-import LocationMarker from './LocationMarker';
+// Components
+import LocationCard from './LocationCard';
+import FireMarker from './FireMarker';
+import SevereStormMarker from './SevereStormMarker';
+import VolcanoMarker from './VolcanoMarker';
 
 const MapWrapper = styled.div`
   width: 100vw;
@@ -9,7 +14,42 @@ const MapWrapper = styled.div`
   position: relative;
 `;
 
-const Map = ({ center, zoom }) => {
+const Map = ({ eventData, center, zoom }) => {
+  const [locationInfo, setLocationInfo] = useState(null);
+
+  const markers = eventData.map((e) => {
+    if (e.categories[0].id === 'wildfires') {
+      return (
+        <FireMarker
+          key={e.id}
+          lat={e.geometry[0].coordinates[1]}
+          lng={e.geometry[0].coordinates[0]}
+          onClick={() => setLocationInfo({ id: e.id, title: e.title })}
+        />
+      );
+    }
+    if (e.categories[0].id === 'severeStorms') {
+      return (
+        <SevereStormMarker
+          key={e.id}
+          lat={e.geometry[0].coordinates[1]}
+          lng={e.geometry[0].coordinates[0]}
+          onClick={() => setLocationInfo({ id: e.id, title: e.title })}
+        />
+      );
+    }
+    if (e.categories[0].id === 'volcanoes') {
+      return (
+        <VolcanoMarker
+          key={e.id}
+          lat={e.geometry[0].coordinates[1]}
+          lng={e.geometry[0].coordinates[0]}
+          onClick={() => setLocationInfo({ id: e.id, title: e.title })}
+        />
+      );
+    }
+    return null;
+  });
   return (
     <MapWrapper>
       <GoogleMapReact
@@ -17,8 +57,9 @@ const Map = ({ center, zoom }) => {
         defaultCenter={center}
         defaultZoom={zoom}
       >
-        <LocationMarker lat={center.lat} lng={center.lng} />
+        {markers}
       </GoogleMapReact>
+      {locationInfo && <LocationCard info={locationInfo} />}
     </MapWrapper>
   );
 };

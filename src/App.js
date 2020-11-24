@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 // Components
+import Header from './components/Header';
 import Map from './components/Map';
 import Loader from './components/Loader';
 
@@ -23,6 +24,7 @@ const App = () => {
 
   return (
     <div className='App'>
+      <Header />
       {!loading ? <Map eventData={eventData} /> : <Loader />}
     </div>
   );
