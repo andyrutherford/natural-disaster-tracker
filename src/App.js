@@ -1,5 +1,11 @@
+import Map from './components/Map';
+
 const App = () => {
-  return <div className='App'>app</div>;
+  return (
+    <div className='App'>
+      <Map />
+    </div>
+  );
 };
 
 export default App;
