@@ -5,6 +5,7 @@ import GoogleMapReact from 'google-map-react';
 // Components
 import LocationCard from './LocationCard';
 import FireMarker from './FireMarker';
+import IceMarker from './IceMarker';
 import SevereStormMarker from './SevereStormMarker';
 import VolcanoMarker from './VolcanoMarker';
 
@@ -38,9 +39,19 @@ const Map = ({ eventData, center, zoom }) => {
         />
       );
     }
-    if (e.categories[0].id === 'volcanoes') {
+    if (e.categories[0].id === 'volcanoes' && e.geometry[0].type === 'Point') {
       return (
         <VolcanoMarker
+          key={e.id}
+          lat={e.geometry[0].coordinates[1]}
+          lng={e.geometry[0].coordinates[0]}
+          onClick={() => setLocationInfo({ id: e.id, title: e.title })}
+        />
+      );
+    }
+    if (e.categories[0].id === 'seaLakeIce') {
+      return (
+        <IceMarker
           key={e.id}
           lat={e.geometry[0].coordinates[1]}
           lng={e.geometry[0].coordinates[0]}

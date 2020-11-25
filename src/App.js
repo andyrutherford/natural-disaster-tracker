@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useQuery } from 'react-query';
 
 // Components
 import Header from './components/Header';
@@ -6,26 +6,23 @@ import Map from './components/Map';
 import Loader from './components/Loader';
 
 // Utils
-import { fetchData } from './utils/fetchData';
+import { fetchEvents } from './utils/api';
 
 const App = () => {
-  const [eventData, setEventData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const { data, error, isLoading, isError } = useQuery('events', fetchEvents);
 
-  useEffect(() => {
-    const fetchEvents = async () => {
-      setLoading(true);
-      const { events } = await fetchData();
-      setEventData(events);
-      setLoading(false);
-    };
-    fetchEvents();
-  }, []);
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  if (isError) {
+    return <h1>{error} </h1>;
+  }
 
   return (
     <div className='App'>
       <Header />
-      {!loading ? <Map eventData={eventData} /> : <Loader />}
+      {data && <Map eventData={data.events} />}
     </div>
   );
 };
