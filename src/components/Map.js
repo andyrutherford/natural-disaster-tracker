@@ -4,10 +4,7 @@ import GoogleMapReact from 'google-map-react';
 
 // Components
 import LocationCard from './LocationCard';
-import FireMarker from './FireMarker';
-import IceMarker from './IceMarker';
-import SevereStormMarker from './SevereStormMarker';
-import VolcanoMarker from './VolcanoMarker';
+import Marker from './markers/Marker';
 
 const MapWrapper = styled.div`
   width: 100vw;
@@ -18,44 +15,27 @@ const MapWrapper = styled.div`
 const Map = ({ eventData, center, zoom }) => {
   const [locationInfo, setLocationInfo] = useState(null);
 
+  const eventTypes = ['wildfires', 'severeStorms', 'volcanoes', 'seaLakeIce'];
+
   const markers = eventData.map((e) => {
-    if (e.categories[0].id === 'wildfires') {
+    if (
+      eventTypes.includes(e.categories[0].id) &&
+      e.geometry[0].type === 'Point'
+    ) {
       return (
-        <FireMarker
+        <Marker
+          type={eventTypes.find((i) => i === e.categories[0].id)}
           key={e.id}
           lat={e.geometry[0].coordinates[1]}
           lng={e.geometry[0].coordinates[0]}
-          onClick={() => setLocationInfo({ id: e.id, title: e.title })}
-        />
-      );
-    }
-    if (e.categories[0].id === 'severeStorms') {
-      return (
-        <SevereStormMarker
-          key={e.id}
-          lat={e.geometry[0].coordinates[1]}
-          lng={e.geometry[0].coordinates[0]}
-          onClick={() => setLocationInfo({ id: e.id, title: e.title })}
-        />
-      );
-    }
-    if (e.categories[0].id === 'volcanoes' && e.geometry[0].type === 'Point') {
-      return (
-        <VolcanoMarker
-          key={e.id}
-          lat={e.geometry[0].coordinates[1]}
-          lng={e.geometry[0].coordinates[0]}
-          onClick={() => setLocationInfo({ id: e.id, title: e.title })}
-        />
-      );
-    }
-    if (e.categories[0].id === 'seaLakeIce') {
-      return (
-        <IceMarker
-          key={e.id}
-          lat={e.geometry[0].coordinates[1]}
-          lng={e.geometry[0].coordinates[0]}
-          onClick={() => setLocationInfo({ id: e.id, title: e.title })}
+          onClick={() =>
+            setLocationInfo({
+              id: e.id,
+              title: e.title,
+              type: e.type,
+              sources: e.sources,
+            })
+          }
         />
       );
     }
