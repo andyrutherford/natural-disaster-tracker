@@ -5,6 +5,7 @@ import GoogleMapReact from 'google-map-react';
 // Components
 import LocationCard from './LocationCard';
 import Marker from './markers/Marker';
+import Filters from './Filters';
 
 const MapWrapper = styled.div`
   width: 100vw;
@@ -13,13 +14,13 @@ const MapWrapper = styled.div`
 `;
 
 const Map = ({ eventData, center, zoom }) => {
-  const [locationInfo, setLocationInfo] = useState(null);
-
   const eventTypes = ['wildfires', 'severeStorms', 'volcanoes', 'seaLakeIce'];
+  const [locationInfo, setLocationInfo] = useState(null);
+  const [filteredEventTypes, setFilteredEventTypes] = useState([...eventTypes]);
 
   const markers = eventData.map((event) => {
     if (
-      eventTypes.includes(event.categories[0].id) &&
+      filteredEventTypes.includes(event.categories[0].id) &&
       event.geometry[0].type === 'Point'
     ) {
       return (
@@ -43,8 +44,20 @@ const Map = ({ eventData, center, zoom }) => {
     }
     return null;
   });
+
+  const filterHandler = (eventType, val) => {
+    if (val) {
+      setFilteredEventTypes([...filteredEventTypes, eventType]);
+    } else {
+      setFilteredEventTypes(
+        filteredEventTypes.filter((event) => event !== eventType)
+      );
+    }
+  };
+
   return (
     <MapWrapper>
+      <Filters filterHandler={filterHandler} />
       <GoogleMapReact
         className='eventMap'
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
