@@ -17,25 +17,27 @@ const Map = ({ eventData, center, zoom }) => {
 
   const eventTypes = ['wildfires', 'severeStorms', 'volcanoes', 'seaLakeIce'];
 
-  const markers = eventData.map((e) => {
+  const markers = eventData.map((event) => {
     if (
-      eventTypes.includes(e.categories[0].id) &&
-      e.geometry[0].type === 'Point'
+      eventTypes.includes(event.categories[0].id) &&
+      event.geometry[0].type === 'Point'
     ) {
       return (
         <Marker
-          type={eventTypes.find((i) => i === e.categories[0].id)}
-          key={e.id}
-          lat={e.geometry[0].coordinates[1]}
-          lng={e.geometry[0].coordinates[0]}
-          onClick={() =>
+          type={eventTypes.find((i) => i === event.categories[0].id)}
+          key={event.id}
+          lat={event.geometry[0].coordinates[1]}
+          lng={event.geometry[0].coordinates[0]}
+          onClick={(e) => {
+            // console.log(e.target, e.currentTarget);
+            // console.log(event.id, event.title, event.type, event.sources);
             setLocationInfo({
-              id: e.id,
-              title: e.title,
-              type: e.type,
-              sources: e.sources,
-            })
-          }
+              id: event.id,
+              title: event.title,
+              type: event.type,
+              sources: event.sources,
+            });
+          }}
         />
       );
     }
@@ -44,9 +46,16 @@ const Map = ({ eventData, center, zoom }) => {
   return (
     <MapWrapper>
       <GoogleMapReact
+        className='eventMap'
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
         defaultCenter={center}
         defaultZoom={zoom}
+        // onClick={(e) => setLocationInfo(null)}
+        onClick={(e) => {
+          e.event.target.parentElement &&
+            !e.event.target.parentElement.classList.length > 0 &&
+            setLocationInfo(null);
+        }}
       >
         {markers}
       </GoogleMapReact>

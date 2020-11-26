@@ -10,11 +10,13 @@ import volcanoIcon from '@iconify/icons-wi/volcano';
 export const MarkerWrapper = styled.div`
   :hover {
     cursor: pointer;
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
   }
 
+  display: block;
   font-size: 2rem;
 
+  border-radius: 50%;
   ${(props) => {
     if (props.type === 'wildfires') {
       return css`
@@ -48,8 +50,20 @@ const eventIcons = {
 };
 
 const Marker = ({ ...props }) => (
-  <MarkerWrapper type={props.type}>
-    <Icon icon={eventIcons[props.type]} onClick={props.onClick} />
+  <MarkerWrapper
+    className='eventMarker'
+    type={props.type}
+    onClick={props.onClick}
+  >
+    <Icon className='eventIcon' icon={eventIcons[props.type]} />
+    {/* <div
+      style={{
+        height: '1em',
+        width: '1em',
+        backgroundColor: 'red',
+        borderRadius: '50%',
+      }}
+    /> */}
   </MarkerWrapper>
 );
 
