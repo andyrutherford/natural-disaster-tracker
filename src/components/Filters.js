@@ -5,15 +5,25 @@ import styled from 'styled-components';
 const FiltersWrapper = styled.div`
   position: absolute;
   top: 80px;
-  left: 50px;
+  left: 30px;
   width: 200px;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 100;
   color: #fff;
   padding: 0.5em;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header p {
+    cursor: pointer;
+  }
 `;
 
-const Filters = ({ filterHandler }) => {
+const Filters = ({ filterHandler, closeHandler }) => {
   const [filter, setFilter] = useState({
     wildfires: true,
     volcanoes: true,
@@ -28,7 +38,10 @@ const Filters = ({ filterHandler }) => {
 
   return (
     <FiltersWrapper>
-      <h2>Filters</h2>
+      <div className='header'>
+        <h2>Filters</h2>
+        <p onClick={closeHandler}>Close</p>
+      </div>
       <div className='form-control'>
         <label htmlFor='wildfires'>
           <input
