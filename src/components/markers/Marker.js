@@ -20,23 +20,23 @@ export const MarkerWrapper = styled.div`
   ${(props) => {
     if (props.type === 'wildfires') {
       return css`
-        color: firebrick;
+        color: #d31404;
       `;
     }
     if (props.type === 'seaLakeIce') {
       return css`
-        color: darkblue;
+        color: #52b2bf;
       `;
     }
     if (props.type === 'severeStorms') {
       return css`
         font-size: 3rem;
-        color: #000;
+        color: #281e5d;
       `;
     }
-    if (props.type === 'volcano') {
+    if (props.type === 'volcanoes') {
       return css`
-        color: #000;
+        color: #7a3803;
       `;
     }
   }};

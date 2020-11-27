@@ -11,6 +11,7 @@ const LocationCardWrapper = styled.div`
   border-radius: 10px;
   font-size: 18px;
   color: #fff;
+  font-weight: 200;
 
   ul {
     list-style-type: none;

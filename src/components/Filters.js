@@ -11,6 +11,7 @@ const FiltersWrapper = styled.div`
   z-index: 100;
   color: #fff;
   padding: 0.5em;
+  border-radius: 10px;
 
   .header {
     display: flex;
@@ -20,6 +21,11 @@ const FiltersWrapper = styled.div`
 
   .header p {
     cursor: pointer;
+  }
+
+  label {
+    display: flex;
+    align-items: center;
   }
 `;
 
