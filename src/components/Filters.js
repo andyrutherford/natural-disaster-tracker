@@ -23,12 +23,12 @@ const FiltersWrapper = styled.div`
   }
 `;
 
-const Filters = ({ filterHandler, closeHandler }) => {
+const Filters = ({ filterHandler, closeHandler, options }) => {
   const [filter, setFilter] = useState({
-    wildfires: true,
-    volcanoes: true,
-    severeStorms: true,
-    seaLakeIce: true,
+    wildfires: options.includes('wildfires'),
+    volcanoes: options.includes('volcanoes'),
+    severeStorms: options.includes('severeStorms'),
+    seaLakeIce: options.includes('seaLakeIce'),
   });
 
   const onChange = (e) => {

@@ -27,8 +27,6 @@ const Map = ({ eventData, center, zoom }) => {
           lat={event.geometry[0].coordinates[1]}
           lng={event.geometry[0].coordinates[0]}
           onClick={(e) => {
-            // console.log(e.target, e.currentTarget);
-            // console.log(event.id, event.title, event.type, event.sources);
             setLocationInfo({
               id: event.id,
               title: event.title,
@@ -56,6 +54,7 @@ const Map = ({ eventData, center, zoom }) => {
     <MapWrapper>
       {showFilters ? (
         <Filters
+          options={filteredEventTypes}
           filterHandler={filterHandler}
           closeHandler={() => setShowFilters(false)}
         />
@@ -88,7 +87,7 @@ Map.defaultProps = {
     lat: 42.3265,
     lng: -122.8756,
   },
-  zoom: 6,
+  zoom: 1,
 };
 
 export default Map;

@@ -6,4 +6,5 @@ export const FilterLabel = styled.p`
   left: 20px;
   z-index: 100;
   cursor: pointer;
+  text-decoration: underline;
 `;
