@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 const LocationCardWrapper = styled.div`
   position: absolute;
-  top: 80px;
-  right: 50px;
+  bottom: 40px;
+  left: 40px;
   width: 400px;
   min-height: 200px;
   padding: 20px;
@@ -12,6 +12,7 @@ const LocationCardWrapper = styled.div`
   font-size: 18px;
   color: #fff;
   font-weight: 200;
+  transform: scale(0.75) translateX(-20%) translateY(25%);
 
   ul {
     list-style-type: none;
@@ -20,6 +21,14 @@ const LocationCardWrapper = styled.div`
 
   li {
     padding: 5px 0;
+  }
+
+  @media (min-width: 768px) {
+    top: 80px;
+    left: initial;
+    bottom: initial;
+    right: 60px;
+    transform: scale(1);
   }
 `;
 

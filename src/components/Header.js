@@ -17,7 +17,7 @@ const HeaderWrapper = styled.header`
   align-items: center;
 
   h1 {
-    font-size: 25px;
+    font-size: 18px;
     padding: 0;
     margin: 0;
     text-align: center;
@@ -29,6 +29,7 @@ const HeaderWrapper = styled.header`
 
   svg {
     fill: #fff;
+    transform: scale(0.75);
   }
 
   .header-left,
@@ -43,6 +44,16 @@ const HeaderWrapper = styled.header`
 
   div:first-child {
     visibility: hidden;
+  }
+
+  @media (min-width: 768px) {
+    h1 {
+      font-size: 25px;
+    }
+
+    svg {
+      transform: scale(1);
+    }
   }
 `;
 
