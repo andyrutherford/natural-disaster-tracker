@@ -3,15 +3,28 @@ import { useState } from 'react';
 // Styles
 import { FiltersWrapper } from './Filters.styles';
 
-const Filters = ({ filterHandler, closeHandler, options }) => {
-  const [filter, setFilter] = useState({
+type filterState = {
+  wildfires: boolean;
+  volcanoes: boolean;
+  severeStorms: boolean;
+  seaLakeIce: boolean;
+};
+
+type Props = {
+  filterHandler: (arg0: string, arg1: boolean) => void;
+  closeHandler: () => void;
+  options: string[];
+};
+
+const Filters: React.FC<Props> = ({ filterHandler, closeHandler, options }) => {
+  const [filter, setFilter] = useState<filterState>({
     wildfires: options.includes('wildfires'),
     volcanoes: options.includes('volcanoes'),
     severeStorms: options.includes('severeStorms'),
     seaLakeIce: options.includes('seaLakeIce'),
   });
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     filterHandler(e.target.id, e.target.checked);
     setFilter({ ...filter, [e.target.id]: e.target.checked });
   };

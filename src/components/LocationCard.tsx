@@ -1,7 +1,20 @@
 // Styles
 import { LocationCardWrapper } from './LocationCard.styles';
 
-const LocationCard = ({ info }) => {
+type Info = {
+  title: string;
+  id: string;
+  sources: {
+    id: string;
+    url: string;
+  }[];
+};
+
+type Props = {
+  info: Info;
+};
+
+const LocationCard: React.FC<Props> = ({ info }) => {
   return (
     <LocationCardWrapper>
       <h2>{info.title} </h2>

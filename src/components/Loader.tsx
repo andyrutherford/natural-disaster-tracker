@@ -17,7 +17,7 @@ const LoaderWrapper = styled.div`
   }
 `;
 
-const Loader = () => {
+const Loader: React.FC = () => {
   return (
     <LoaderWrapper>
       <img src={loader} alt='Loading' />

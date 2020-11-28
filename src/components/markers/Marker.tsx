@@ -8,20 +8,30 @@ import volcanoIcon from '@iconify/icons-wi/volcano';
 // Styles
 import { MarkerWrapper } from './Marker.styles';
 
-const eventIcons = {
+const eventIcons: { [key: string]: any } = {
   wildfires: fireIcon,
   severeStorms: stormIcon,
   seaLakeIce: iceIcon,
   volcanoes: volcanoIcon,
 };
 
-const Marker = ({ ...props }) => (
-  <MarkerWrapper
-    className='eventMarker'
-    type={props.type}
-    onClick={props.onClick}
-  >
-    <Icon className='eventIcon' icon={eventIcons[props.type]} />
+type MarkerProps = {
+  eventType: string;
+  key: string;
+  lat: number;
+  lng: number;
+  onClick: () => void;
+};
+
+const Marker: React.FC<MarkerProps> = ({
+  eventType,
+  key,
+  lat,
+  lng,
+  onClick,
+}) => (
+  <MarkerWrapper className='eventMarker' type={eventType} onClick={onClick}>
+    <Icon className='eventIcon' icon={eventIcons[eventType]} />
   </MarkerWrapper>
 );
 

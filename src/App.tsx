@@ -8,7 +8,7 @@ import Loader from './components/Loader';
 // Utils
 import { fetchEvents } from './utils/api';
 
-const App = () => {
+const App: React.FC = () => {
   const { data, error, isLoading, isError } = useQuery('events', fetchEvents);
 
   if (isLoading) {

@@ -1,6 +1,13 @@
 import styled, { css } from 'styled-components';
 
-export const MarkerWrapper = styled.div`
+type MarkerWrapperProps = {
+  type?: string,
+};
+
+export const MarkerWrapper =
+  styled.div <
+  MarkerWrapperProps >
+  `
   :hover {
     cursor: pointer;
   }

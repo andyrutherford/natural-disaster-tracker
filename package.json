@@ -45,5 +45,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/google-map-react": "^2.1.0",
+    "@types/react-query": "^1.1.2",
+    "@types/styled-components": "^5.1.4"
   }
 }
