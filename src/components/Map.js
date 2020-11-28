@@ -6,6 +6,7 @@ import LocationCard from './LocationCard';
 import Marker from './markers/Marker';
 import Filters from './Filters';
 
+// Styles
 import { MapWrapper } from './Map.styles';
 import { FilterLabel } from './FilterLabel.styles';
 
